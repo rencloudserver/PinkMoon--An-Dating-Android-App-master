@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+
+        <!--<include layout="@layout/layout_top_navigation_back"/>-->
+        <include layout="@layout/layout_top_navigation_back" />
+
+        <com.example.yuxuanli.pinmoon.Utils.SquareImageView
+            android:id="@+id/profileImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="Click to change profile photo"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_man" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/light_grey"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="About Me:"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edit_aboutme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="Enter information about yourself which others can see."
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/light_grey"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="My Interests:"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox android:id="@+id/checkbox_sports"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Sports"
+                android:onClick="onHobbyCheckBoxClicked"/>
+            <CheckBox android:id="@+id/checkbox_travel"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Travel"
+                android:onClick="onHobbyCheckBoxClicked"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox android:id="@+id/checkbox_music"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Music"
+                android:onClick="onHobbyCheckBoxClicked"/>
+            <CheckBox android:id="@+id/checkbox_fishing"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Fishing"
+                android:onClick="onHobbyCheckBoxClicked"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/light_grey"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="I AM:"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupUserSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/maleSelction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/femaleSelection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="Female" />
+
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/light_grey"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="Phone Number:"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edit_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="Enter Your Phone Number"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:textSize="16sp" />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/white_rounded_button"
+            android:gravity="center"
+            android:onClick="saveAndBack"
+            android:text="Save and back"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+</ScrollView>
