@@ -1,17 +1,22 @@
-package com.example.yuxuanli.pinmoon.Login;
+package com.example.yuxuanli.pinmoon.Login.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.yuxuanli.pinmoon.Main.MainActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import com.example.yuxuanli.pinmoon.R;
 import com.example.yuxuanli.pinmoon.Utils.FirebaseMethods;
 import com.example.yuxuanli.pinmoon.Utils.User;
@@ -23,17 +28,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
-public class RegisterHobby extends AppCompatActivity {
-    private static final String TAG = "RegisterHobby";
+public class RegisterHobby5 extends Fragment {
+    private static final String TAG = "RegisterHobby5";
 
     //User Info
     User userInfo;
     String password;
 
     private Context mContext;
-    private Button hobbiesContinueButton;
+    private Button registerButton;
     private Button sportsSelectionButton;
     private Button travelSelectionButton;
     private Button musicSelectionButton;
@@ -48,29 +51,36 @@ public class RegisterHobby extends AppCompatActivity {
 
     private String append = "";
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_hobby);
-        mContext = RegisterHobby.this;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.frag_register_hobby, container, false);
+        mContext = getActivity();
         firebaseMethods = new FirebaseMethods(mContext);
-        Log.d(TAG, "onCreate: started");
-
-        Intent intent = getIntent();
-        userInfo = (User) intent.getSerializableExtra("classUser");
-        password = intent.getStringExtra("password");
-
-        initWidgets();
+        getBundle();
+        Toolbar mToolbar = (Toolbar) view.findViewById(R.id.toolbar2);
+        if (mToolbar != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+        }
+        mToolbar.setTitle(null);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigate(R.id.action_registerHobby5_to_registerAge4);
+            }
+        });
+        initWidgets(view);
         setupFirebaseAuth();
         init();
+        return view;
     }
 
-    private void initWidgets(){
-        sportsSelectionButton = (Button) findViewById(R.id.sportsSelectionButton);
-        travelSelectionButton = (Button) findViewById(R.id.travelSelectionButton);
-        musicSelectionButton = (Button) findViewById(R.id.musicSelectionButton);
-        fishingSelectionButton = (Button) findViewById(R.id.fishingSelectionButton);
-        hobbiesContinueButton = (Button) findViewById(R.id.hobbiesContinueButton);
+    private void initWidgets(View view) {
+        sportsSelectionButton = (Button) view.findViewById(R.id.sportsSelectionButton);
+        travelSelectionButton = (Button) view.findViewById(R.id.travelSelectionButton);
+        musicSelectionButton = (Button) view.findViewById(R.id.musicSelectionButton);
+        fishingSelectionButton = (Button) view.findViewById(R.id.fishingSelectionButton);
+        registerButton = (Button) view.findViewById(R.id.registerButton);
 
         // Initially all the buttons needs to be grayed out so this code is added, on selection we will enable it later
         sportsSelectionButton.setAlpha(.5f);
@@ -118,14 +128,11 @@ public class RegisterHobby extends AppCompatActivity {
 
     public void sportsButtonClicked() {
         // this is to toggle between selection and non selection of button
-        if (sportsSelectionButton.getAlpha() == 1.0f)
-        {
+        if (sportsSelectionButton.getAlpha() == 1.0f) {
             sportsSelectionButton.setAlpha(.5f);
             sportsSelectionButton.setBackgroundColor(Color.GRAY);
             userInfo.setSports(false);
-        }
-        else
-        {
+        } else {
             sportsSelectionButton.setBackgroundColor(Color.parseColor("#FF4081"));
             sportsSelectionButton.setAlpha(1.0f);
             userInfo.setSports(true);
@@ -134,14 +141,11 @@ public class RegisterHobby extends AppCompatActivity {
 
     public void travelButtonClicked() {
         // this is to toggle between selection and non selection of button
-        if (travelSelectionButton.getAlpha() == 1.0f)
-        {
+        if (travelSelectionButton.getAlpha() == 1.0f) {
             travelSelectionButton.setAlpha(.5f);
             travelSelectionButton.setBackgroundColor(Color.GRAY);
             userInfo.setTravel(false);
-        }
-        else
-        {
+        } else {
             travelSelectionButton.setBackgroundColor(Color.parseColor("#FF4081"));
             travelSelectionButton.setAlpha(1.0f);
             userInfo.setTravel(true);
@@ -150,17 +154,13 @@ public class RegisterHobby extends AppCompatActivity {
 
     }
 
-    public void musicButtonClicked()
-    {
+    public void musicButtonClicked() {
         // this is to toggle between selection and non selection of button
-        if (musicSelectionButton.getAlpha() == 1.0f)
-        {
+        if (musicSelectionButton.getAlpha() == 1.0f) {
             musicSelectionButton.setAlpha(.5f);
             musicSelectionButton.setBackgroundColor(Color.GRAY);
             userInfo.setMusic(false);
-        }
-        else
-        {
+        } else {
             musicSelectionButton.setBackgroundColor(Color.parseColor("#FF4081"));
             musicSelectionButton.setAlpha(1.0f);
             userInfo.setMusic(true);
@@ -169,17 +169,13 @@ public class RegisterHobby extends AppCompatActivity {
 
     }
 
-    public void fishingButtonClicked()
-    {
+    public void fishingButtonClicked() {
         // this is to toggle between selection and non selection of button
-        if (fishingSelectionButton.getAlpha() == 1.0f)
-        {
+        if (fishingSelectionButton.getAlpha() == 1.0f) {
             fishingSelectionButton.setAlpha(.5f);
             fishingSelectionButton.setBackgroundColor(Color.GRAY);
             userInfo.setFishing(false);
-        }
-        else
-        {
+        } else {
             fishingSelectionButton.setBackgroundColor(Color.parseColor("#FF4081"));
             fishingSelectionButton.setAlpha(1.0f);
             userInfo.setFishing(true);
@@ -189,10 +185,11 @@ public class RegisterHobby extends AppCompatActivity {
     }
 
     public void init() {
-        hobbiesContinueButton.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//                Navigation.findNavController(getView()).navigate(R.id.action_registerHobby5_pop);
+//                NavHostFragment navHost = NavHostFragment.create(R.navigation.nav_graph);
                 firebaseMethods.registerNewEmail(userInfo.getEmail(), password, userInfo.getUsername());
             }
         });
@@ -204,12 +201,12 @@ public class RegisterHobby extends AppCompatActivity {
     /**
      * Setup the firebase auth object
      */
-    private void setupFirebaseAuth(){
+    private void setupFirebaseAuth() {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance(); // get database instance
         myRef = mFirebaseDatabase.getReference();
 
-        mAuthListener = new FirebaseAuth.AuthStateListener(){
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
 
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -235,9 +232,7 @@ public class RegisterHobby extends AppCompatActivity {
                             Toast.makeText(mContext, "Signup successful. Sending verification email.", Toast.LENGTH_SHORT).show();
 
                             mAuth.signOut();
-
-                            Intent intent = new Intent(RegisterHobby.this, Login.class);
-                            startActivity(intent);
+                            getFragmentManager().beginTransaction().remove(RegisterHobby5.this).commit();
                         }
 
                         @Override
@@ -255,17 +250,27 @@ public class RegisterHobby extends AppCompatActivity {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
+    private Bundle getBundle() {
+        final Bundle bundle = getArguments();
+        if (bundle != null) {
+            userInfo = (User) bundle.getSerializable("classUser");
+            password = bundle.getString("password");
         }
+        return bundle;
     }
+
 }

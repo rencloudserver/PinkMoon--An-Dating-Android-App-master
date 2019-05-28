@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
+    <include
+        layout="@layout/login_frag_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
 
     <TextView
         android:id="@+id/numberOfPagesLeft"
@@ -13,7 +21,7 @@
         android:layout_gravity="right"
         android:gravity="right"
         android:layout_marginRight="24dp"
-        android:text="2/5"
+        android:text="5/5"
         android:textColor="#747474"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -25,7 +33,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginTop="120dp"
-        android:text="Gender Please !!!!"
+        android:text="Please select your hobbies:"
         android:textColor="#747474"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -36,7 +44,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/maleSelectionButton"
+            android:id="@+id/sportsSelectionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
@@ -44,22 +52,58 @@
             android:layout_weight="1"
             android:background="#ff4081"
             android:elevation="24dp"
-            android:text="MALE"
+            android:text="SPORTS"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/femaleSelectionButton"
+            android:id="@+id/travelSelectionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="24dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:background="#ff4081"
             android:elevation="24dp"
-            android:text="FEMALE"
+            android:text="TRAVEL"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/musicSelectionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="#ff4081"
+            android:elevation="24dp"
+            android:text="MUSIC"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/fishingSelectionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="#ff4081"
+            android:elevation="24dp"
+            android:text="Fishing"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -67,7 +111,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/genderContinueButton"
+        android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
@@ -76,7 +120,7 @@
         android:background="#ff4081"
         android:backgroundTint="#ff4081"
         android:elevation="24dp"
-        android:text="Continue"
+        android:text="Register"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
 

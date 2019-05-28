@@ -1,12 +1,6 @@
-package com.example.yuxuanli.pinmoon.Login;
+package com.example.yuxuanli.pinmoon.Login.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +8,21 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import com.example.yuxuanli.pinmoon.R;
-import com.example.yuxuanli.pinmoon.Utils.GPS;
 import com.example.yuxuanli.pinmoon.Utils.User;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class RegisterAge extends Fragment {
+public class RegisterAge4 extends Fragment {
 
     String password;
     User user;
@@ -38,14 +37,21 @@ public class RegisterAge extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_registerbasic_info,container,false);
+        View view = inflater.inflate(R.layout.frag_register_age,container,false);
 //        mContext = getActivity();
+        getBundle();
         initWidgets(view);
-
-//        Intent intent = getIntent();
-//        user = (User) intent.getSerializableExtra("classUser");
-//        password = intent.getStringExtra("password");
-
+        Toolbar mToolbar = (Toolbar) view.findViewById(R.id.toolbar2);
+        if (mToolbar != null) {
+            ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        }
+        mToolbar.setTitle(null);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigate(R.id.action_registerAge4_to_registerGenderPrefection3,getBundle());
+            }
+        });
         ageContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -76,10 +82,19 @@ public class RegisterAge extends Fragment {
             // code to set the dateOfBirthAttribute.
             user.setDateOfBirth(strDateOfBirth);
 
-//            Intent intent = new Intent(this, RegisterHobby.class);
+//            Intent intent = new Intent(this, RegisterHobby5.class);
 //            intent.putExtra("password", password);
 //            intent.putExtra("classUser", user);
 //            startActivity(intent);
+            RegisterHobby5 registerHobby5 = new RegisterHobby5();
+            Bundle bundle = new Bundle();
+            bundle.putString("password", password);
+            bundle.putSerializable("classUser",user);
+//            registerHobby5.setArguments(args);
+            //Inflate the fragment
+//            getFragmentManager().beginTransaction().replace(R.id.loginFrame, registerHobby5).commit();
+
+            Navigation.findNavController(getView()).navigate(R.id.action_registerAge4_to_registerHobby5, getBundle());
         }
         else
         {
@@ -113,5 +128,13 @@ public class RegisterAge extends Fragment {
 
         ageContinueButton = (Button) view.findViewById(R.id.ageContinueButton);
 
+    }
+    private Bundle getBundle(){
+        final Bundle bundle = getArguments();
+        if(bundle!=null){
+            user = (User) bundle.getSerializable("classUser");
+            password = bundle.getString("password");
+        }
+        return bundle;
     }
 }

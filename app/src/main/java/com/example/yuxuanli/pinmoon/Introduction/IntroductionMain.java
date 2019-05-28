@@ -2,12 +2,12 @@ package com.example.yuxuanli.pinmoon.Introduction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.yuxuanli.pinmoon.Login.Login;
-import com.example.yuxuanli.pinmoon.Login.RegisterBasicInfo;
+import com.example.yuxuanli.pinmoon.Login.Activity.Login;
+import com.example.yuxuanli.pinmoon.Login.Fragment.RegisterBasicInfo1;
 import com.example.yuxuanli.pinmoon.R;
 
 public class IntroductionMain extends AppCompatActivity {
@@ -45,7 +45,7 @@ public class IntroductionMain extends AppCompatActivity {
     }
 
     public void openEmailAddressEntryPage() {
-        Intent intent = new Intent(this, RegisterBasicInfo.class);
+        Intent intent = new Intent(this, RegisterBasicInfo1.class);
         startActivity(intent);
     }
 }

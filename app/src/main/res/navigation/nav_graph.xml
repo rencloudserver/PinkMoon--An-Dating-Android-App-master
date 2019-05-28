@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/registerBasicInfo1">
+
+    <fragment
+        android:id="@+id/registerBasicInfo1"
+        android:name="com.example.yuxuanli.pinmoon.Login.Fragment.RegisterBasicInfo1"
+        android:label="frag_registerbasic_info"
+        tools:layout="@layout/frag_registerbasic_info" >
+        <action
+            android:id="@+id/action_registerBasicInfo1_to_registerGender2"
+            app:destination="@id/registerGender2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerGender2"
+        android:name="com.example.yuxuanli.pinmoon.Login.Fragment.RegisterGender2"
+        android:label="frag_register_gender"
+        tools:layout="@layout/frag_register_gender" >
+        <action
+            android:id="@+id/action_registerGender2_to_registerGenderPrefection3"
+            app:destination="@id/registerGenderPrefection3" />
+        <action
+            android:id="@+id/action_registerGender2_to_registerBasicInfo1"
+            app:destination="@id/registerBasicInfo1" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerGenderPrefection3"
+        android:name="com.example.yuxuanli.pinmoon.Login.Fragment.RegisterGenderPrefection3"
+        android:label="frag_register_gender_prefection"
+        tools:layout="@layout/frag_register_gender_prefection" >
+        <action
+            android:id="@+id/action_registerGenderPrefection3_to_registerAge4"
+            app:destination="@id/registerAge4" />
+        <action
+            android:id="@+id/action_registerGenderPrefection3_to_registerGender2"
+            app:destination="@id/registerGender2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerAge4"
+        android:name="com.example.yuxuanli.pinmoon.Login.Fragment.RegisterAge4"
+        android:label="frag_register_age"
+        tools:layout="@layout/frag_register_age" >
+        <action
+            android:id="@+id/action_registerAge4_to_registerHobby5"
+            app:destination="@id/registerHobby5" />
+        <action
+            android:id="@+id/action_registerAge4_to_registerGenderPrefection3"
+            app:destination="@id/registerGenderPrefection3" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerHobby5"
+        android:name="com.example.yuxuanli.pinmoon.Login.Fragment.RegisterHobby5"
+        android:label="frag_register_hobby"
+        tools:layout="@layout/frag_register_hobby" >
+        <action
+            android:id="@+id/action_registerHobby5_to_registerAge4"
+            app:destination="@id/registerAge4" />
+    </fragment>
+</navigation>

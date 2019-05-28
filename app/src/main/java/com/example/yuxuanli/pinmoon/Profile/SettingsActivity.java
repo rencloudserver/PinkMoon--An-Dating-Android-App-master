@@ -2,14 +2,14 @@ package com.example.yuxuanli.pinmoon.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.yuxuanli.pinmoon.Login.Login;
+import com.example.yuxuanli.pinmoon.Login.Activity.Login;
 import com.example.yuxuanli.pinmoon.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

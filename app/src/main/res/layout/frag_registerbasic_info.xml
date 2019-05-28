@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
-
+    <include
+        layout="@layout/login_frag_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
     <TextView
         android:id="@+id/numberOfPagesLeft"
         android:layout_width="wrap_content"
@@ -34,7 +41,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -45,9 +52,9 @@
                 android:inputType="textEmailAddress"
                 android:hint="entry your Email"
                 android:id="@+id/input_email"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -58,9 +65,9 @@
                 android:inputType="textEmailAddress"
                 android:hint="enter your username "
                 android:id="@+id/input_username"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -71,9 +78,9 @@
                 android:inputType="textPassword"
                 android:hint="enter your Password"
                 android:id="@+id/input_password"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             style="@android:style/Widget.Material.Button.Borderless.Colored"
             android:layout_height="wrap_content"
@@ -86,5 +93,7 @@
             android:background="@color/colorPrimary"/>
 
     </LinearLayout>
+
+
 
 </RelativeLayout>

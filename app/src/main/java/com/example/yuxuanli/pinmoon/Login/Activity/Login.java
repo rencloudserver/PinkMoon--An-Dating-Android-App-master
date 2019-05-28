@@ -1,14 +1,14 @@
-package com.example.yuxuanli.pinmoon.Login;
+package com.example.yuxuanli.pinmoon.Login.Activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.fragment.NavHostFragment;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -116,18 +116,20 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating to register screen");
-//                Intent intent = new Intent (Login.this, RegisterBasicInfo.class);
+//                Intent intent = new Intent (Login.this, RegisterBasicInfo1.class);
 //                startActivity(intent);
                 Fragment fragment = null;
                 if(fragment == null){
-                    fragment = new RegisterBasicInfo();
-                    FragmentManager manager = getSupportFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.add(R.id.loginFrame,fragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+                    NavHostFragment navHost = NavHostFragment.create(R.navigation.nav_graph);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.loginFrame, navHost).setPrimaryNavigationFragment(navHost).commit();
+//                    FragmentManager manager = getSupportFragmentManager();
+//                    FragmentTransaction transaction = manager.beginTransaction();
+//                    transaction.add(R.id.loginFrame,fragment);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
                 }
 
+//                Navigation.findNavController(R.id.registerBasicInfo1).navigate(R.id.registerBasicInfo1);
             }
         });
 

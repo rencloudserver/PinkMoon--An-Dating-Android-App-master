@@ -1,13 +1,8 @@
-package com.example.yuxuanli.pinmoon.Login;
+package com.example.yuxuanli.pinmoon.Login.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import com.example.yuxuanli.pinmoon.R;
 import com.example.yuxuanli.pinmoon.Utils.FirebaseMethods;
 import com.example.yuxuanli.pinmoon.Utils.GPS;
@@ -25,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class RegisterBasicInfo extends Fragment {
+public class RegisterBasicInfo1 extends Fragment {
     private static final String TAG = "RegisterActivity";
 
     private Context mContext;
@@ -41,6 +43,7 @@ public class RegisterBasicInfo extends Fragment {
     private FirebaseMethods firebaseMethods;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
+    private User user;
 
     private String append = "";
 
@@ -49,21 +52,36 @@ public class RegisterBasicInfo extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_registerbasic_info,container,false);
+        View view = inflater.inflate(R.layout.frag_registerbasic_info,container,false);
         mContext = getActivity();
-        Log.d(TAG, "onCreate: started");
-
         gps = new GPS(mContext);
+        final Bundle bundle = getArguments();
+        if(bundle!=null){
+//            user = (User) bundle.getSerializable("classUser");
+//            password = bundle.getString("password");
+        }
 
-        initWidgets(view);
+        initWidgets(view,bundle);
         init();
+        Toolbar mToolbar = (Toolbar) view.findViewById(R.id.toolbar2);
+        if (mToolbar != null) {
+            ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        }
+        mToolbar.setTitle(null);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().remove(RegisterBasicInfo1.this).commit();
+            }
+        });
+
         return view;
     }
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_registerbasic_info);
+//        setContentView(R.layout.frag_registerbasic_info);
 //
 //    }
 
@@ -86,23 +104,17 @@ public class RegisterBasicInfo extends Fragment {
                         latitude = location.getLatitude();
                         longtitude = location.getLongitude();
                     }
-
-                    Intent intent = new Intent(getActivity(), RegisterGender.class);
-                    User user = new User("","","","",email, username, false, false, false, false, "","","", latitude, longtitude);
+                    user = new User("","","","",email, username, false, false, false, false, "","","", latitude, longtitude);
                     //Put the value
-                    YourNewFragment ldf = new YourNewFragment ();
-                    Bundle args = new Bundle();
-                    args.putString("password", password);
-                    args.put
-                    ldf.setArguments(args);
+                    RegisterGender2 registerGender2 = new RegisterGender2();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("password", password);
+                    bundle.putSerializable("classUser",user);
+//                    registerGender2.setArguments(bundle);
+                    Navigation.findNavController(getView()).navigate(R.id.action_registerBasicInfo1_to_registerGender2,bundle);
 
-//Inflate the fragment
-                    getFragmentManager().beginTransaction().add(R.id.container, ldf).commit();
-
-
-                    intent.putExtra();
-                    intent.putExtra();
-                    startActivity(intent);
+                    //Inflate the fragment
+//                    getFragmentManager().beginTransaction().replace(R.id.loginFrame, registerGender2).commit();
                 }
             }
         });
@@ -128,13 +140,22 @@ public class RegisterBasicInfo extends Fragment {
         return true;
     }
 
-    private void initWidgets(View view) {
+    private void initWidgets(View view, Bundle bundle) {
+
         Log.d(TAG, "initWidgets: initializing widgets");
         mEmail = (EditText) view.findViewById(R.id.input_email);
         mUsername = (EditText) view.findViewById(R.id.input_username);
         btnContinue = (Button) view.findViewById(R.id.btn_continue);
         mPassword = (EditText) view.findViewById(R.id.input_password);
         mContext = getActivity();
+        if(bundle!=null){
+            user = (User) bundle.getSerializable("classUser");
+            password = bundle.getString("password");
+            mEmail.setText(user.getEmail());
+            mUsername.setText(user.getUsername());
+            mPassword.setText(password);
+
+        }
 
     }
 }
